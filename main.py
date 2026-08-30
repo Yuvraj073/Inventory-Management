@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-
+from models import Product
 app = FastAPI()
 
 products = [
@@ -11,15 +11,35 @@ products = [
 
 product = Product(id=5, name="Chair", description="A comfortable chair", price=89.99, quantity=15)
 
-@app.get("/produts")
+@app.get("/products")
 def get_all_produts ():
     return products
 
-@app.get("/produts/{id}")
+@app.get("/products/{id}")
 def get_product_by_id(id: int):
     for product in products:
         if product.id == id:
             return product
+    return "product not found"
 
 @app.post("/products")
-def add_product():
+def add_product(product: Product):
+    products.append()
+    return product
+
+@app.put("/product")
+def update_product(id:int, product:Product):
+    for i in range(len(products)):
+        if products[i].id == id:
+            products[i] = product
+            return "Product Updated successfully"
+    return"Product not found"
+
+@app.delete("/product")
+def delete_product(id:int):
+    for i in range(len(products)):
+        if products[i].id == id:
+            del product
+            return "Product deleted successfully"
+
+    return "Product not found"
