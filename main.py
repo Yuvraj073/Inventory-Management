@@ -24,7 +24,7 @@ def get_product_by_id(id: int):
 
 @app.post("/products")
 def add_product(product: Product):
-    products.append()
+    products.append(product)
     return product
 
 @app.put("/product")
@@ -39,8 +39,16 @@ def update_product(id:int, product:Product):
 def delete_product(id:int):
     for i in range(len(products)):
         if products[i].id == id:
-            del product
+            del products[i]
             return "Product deleted successfully"
 
     return "Product not found"
+
+@app.get("/products/search")
+def search_products(name: str):
+    result = []
+    for product in products:
+        if name.lower() in product.name.lower():
+            result.append(product)
+    return result
 
