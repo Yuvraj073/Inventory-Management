@@ -4,6 +4,6 @@ class Product(BaseModel):
     id : int
     name : str
     description : str
-    price : int
+    price : float
     quantity : int
 
